@@ -1,7 +1,5 @@
 package object paquete {
 
-
-
   def aeropuertos(cod: String, x: Int, y: Int, gmt: Int ): Unit ={
 
   }
