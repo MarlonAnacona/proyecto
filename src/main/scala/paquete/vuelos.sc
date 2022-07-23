@@ -1,8 +1,9 @@
 object datos {
-  case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
-  case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
+  case class Aeropuerto(Cod: String, X: Int, Y: Int, GMT: Int)
 
-  val aeropuertos=List(
+  case class Vuelo(Aln: String, Num: Int, Org: String, HS: Int, MS: Int, Dst: String, HL: Int, ML: Int, Esc: Int)
+
+  val aeropuertos = List(
     Aeropuerto("ABQ", 195, 275, -800),
     Aeropuerto("ATL", 470, 280, -600),
     Aeropuerto("BNA", 430, 240, -700),
@@ -28,7 +29,7 @@ object datos {
     Aeropuerto("TPA", 500, 360, -600)
   )
 
-  val vuelos=List(
+  val vuelos = List(
     Vuelo("4X", 373, "HOU", 13, 15, "MSY", 15, 10, 1),
     Vuelo("4X", 201, "MSY", 8, 35, "HOU", 12, 20, 2),
     Vuelo("4X", 372, "MSY", 11, 0, "HOU", 12, 55, 1),
