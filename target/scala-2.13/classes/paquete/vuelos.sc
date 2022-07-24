@@ -3,7 +3,7 @@ import paquete._;
 
 
  println(itenerario("MSY","HOU"));
- println(itinerariosCambios("MSY","HOU"))
+println(itinerariosCambios("MSY","HOU"))
  println(itinerariosTiempo("MSY","HOU"));
 
  // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
