@@ -150,16 +150,18 @@ package object paquete {
   }
 
   //Itenerarios con menor  el tiempo de vuelo
-  def itenerarioDistancia(a1:String,a2:String): Unit ={
+  def itenerarioDistancia(a1:String,a2:String): List[Vuelo]  ={
 
     val ls=itenerario(a1,a2);
 
     ls.sortBy(r => ((((r.HS)*60)+r.MS)-(((r.HL)*60)+r.ML)).abs).take(3);
 
-
   }
 //Optimizacion en horario de salida
-  def itenerariosSalida(a1:String,a2:String,h:String,m:String): Unit ={
+  def itenerariosSalida(a1:String,a2:String,h:Int,m:Int): List[Vuelo] = {
+
+   val ls= for (c <- itenerario(a1, a2) if (((h * 60) + m) < ((c.HL * 60) + c.ML))) yield c
+  ls.sortBy(r=>(r.HS)).reverse.take(1);
 
   }
 
