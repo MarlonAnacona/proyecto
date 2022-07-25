@@ -136,7 +136,7 @@ package object paquete {
   def itinerariosTiempo(a1: String, a2:String ): List[Vuelo] ={
      val ls=itenerario(a1,a2);
 
-    ls.sortBy(r => ((((r.HS)*60)+r.MS)-(((r.HL)*60)+r.ML)).abs).take(3);
+    ls.sortBy(r => (((((r.HS)*60)+r.MS)-(((r.HL)*60)+r.ML)).abs,r.Esc)).take(3)
 
   }
 
