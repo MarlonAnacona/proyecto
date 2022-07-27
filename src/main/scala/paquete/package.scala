@@ -1,35 +1,37 @@
+import paquete.Vuelo
+
 import scala.collection.convert.ImplicitConversions.`seq AsJavaList`
 
 package object paquete {
 
-
-  case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
-  case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
+abstract  class  aero
+  case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int) extends aero
+  case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int) extends  aero
 
   val aeropuertos=List(
-    Aeropuerto("ABQ", 195, 275, -800),
-    Aeropuerto("ATL", 470, 280, -600),
-    Aeropuerto("BNA", 430, 240, -700),
-    Aeropuerto("BOS", 590, 100, -600),
-    Aeropuerto("DCA", 540, 180, -600),
-    Aeropuerto("DEN", 215, 205, -800),
-    Aeropuerto("DFW", 310, 305, -700),
-    Aeropuerto("DTW", 445, 140, -600),
-    Aeropuerto("HOU", 330, 355, -700),
-    Aeropuerto("JFK", 565, 130, -600),
-    Aeropuerto("LAX", 55, 270, -900),
-    Aeropuerto("MIA", 535, 390, -600),
-    Aeropuerto("MSP", 340, 115, -700),
-    Aeropuerto("MSY", 405, 345, -700),
-    Aeropuerto("ORD", 410, 155, -700),
-    Aeropuerto("PHL", 550, 155, -600),
-    Aeropuerto("PHX", 120, 290, -800),
-    Aeropuerto("PVD", 595, 122, -600),
-    Aeropuerto("RDU", 530, 230, -600),
-    Aeropuerto("SEA", 55, 45, -900),
-    Aeropuerto("SFO", 10, 190, -900),
-    Aeropuerto("STL", 380, 210, -700),
-    Aeropuerto("TPA", 500, 360, -600)
+    Aeropuerto("ABQ", 195, 275, -8),
+    Aeropuerto("ATL", 470, 280, -6),
+    Aeropuerto("BNA", 430, 240, -7),
+    Aeropuerto("BOS", 590, 100, -6),
+    Aeropuerto("DCA", 540, 180, -6),
+    Aeropuerto("DEN", 215, 205, -8),
+    Aeropuerto("DFW", 310, 305, -7),
+    Aeropuerto("DTW", 445, 140, -6),
+    Aeropuerto("HOU", 330, 355, -7),
+    Aeropuerto("JFK", 565, 130, -6),
+    Aeropuerto("LAX", 55, 270, -9),
+    Aeropuerto("MIA", 535, 390, -6),
+    Aeropuerto("MSP", 340, 115, -7),
+    Aeropuerto("MSY", 405, 345, -7),
+    Aeropuerto("ORD", 410, 155, -7),
+    Aeropuerto("PHL", 550, 155, -6),
+    Aeropuerto("PHX", 120, 290, -8),
+    Aeropuerto("PVD", 595, 122, -6),
+    Aeropuerto("RDU", 530, 230, -6),
+    Aeropuerto("SEA", 55, 45, -9),
+    Aeropuerto("SFO", 10, 190, -9),
+    Aeropuerto("STL", 380, 210, -7),
+    Aeropuerto("TPA", 500, 360, -6)
   )
 
   //________________________________________________________
@@ -51,7 +53,24 @@ package object paquete {
     Vuelo("AA", 828, "MSY", 17, 10, "BNA", 18, 37, 0),
     Vuelo("AA", 212, "DFW", 17, 21, "ORD", 19, 41, 0),
     Vuelo("AA", 673, "ORD", 21, 30, "SEA", 12, 7, 0),
-    Vuelo("AA", 25, "DFW", 18, 37, "PHX", 10, 1, 0)
+    Vuelo("AA", 25, "DFW", 18, 37, "PHX", 10, 1, 0) ,
+    Vuelo("AA", 35, "RDU", 14, 10, "MIA", 16, 21, 0),
+    Vuelo("AA", 179, "ORD", 18, 30, "PHX", 11, 12, 0),
+    Vuelo("AA", 580, "SFO", 12, 25, "ORD", 11, 5, 1),
+    Vuelo("AA", 70, "SFO", 8, 8, "DFW", 13, 31, 0),
+    Vuelo("AA", 835, "DTW", 17, 0, "ORD", 17, 13, 0),
+    Vuelo("AA", 890, "PHX", 1, 40, "ORD", 15, 5, 0),
+    Vuelo("AA", 784, "DFW", 10, 54, "ORD", 12, 56, 0),
+    Vuelo("AA", 796, "DEN", 15, 7, "BNA", 18, 47, 0),
+    Vuelo("AA", 89, "ORD", 18, 30, "LAX", 10, 35, 0),
+    Vuelo("AA", 920, "MIA", 8, 44, "DCA", 11, 6, 0),
+
+    Vuelo("AA", 837, "ATL", 7, 25, "DFW", 13, 5, 0),
+    Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
+
+    Vuelo("AA", 203, "DFW", 8, 10, "BOS", 14, 7, 0),
+    Vuelo("AA", 334, "RDU", 9, 0, "PVD", 10, 40, 0),
+    Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
   )
 
   val vuelosA2= List(
@@ -65,12 +84,16 @@ package object paquete {
     Vuelo("AA", 796, "DEN", 15, 7, "BNA", 18, 47, 0),
     Vuelo("AA", 89, "ORD", 18, 30, "LAX", 10, 35, 0),
     Vuelo("AA", 920, "MIA", 8, 44, "DCA", 11, 6, 0),
-    Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
+
     Vuelo("AA", 837, "ATL", 7, 25, "DFW", 13, 5, 0),
-    Vuelo("AA", 203, "DFW", 8, 10, "SFO", 14, 7, 0),
+    Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
+
+    Vuelo("AA", 203, "DFW", 8, 10, "BOS", 14, 7, 0),
     Vuelo("AA", 334, "RDU", 9, 0, "PVD", 10, 40, 0),
     Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
   )
+  //(("ATL","DFW"),(DFW,BOS),(DFW,BOS))
+  //((("ATL","DFW"),(DFW,BOS)),(("ATL","DFW"),(DFW,BOS)))
 
   val vuelosA3= List(
     Vuelo("AA", 400, "LAX", 7, 30, "MIA", 15, 30, 0),
@@ -128,16 +151,119 @@ package object paquete {
   //devuelve la ruta
   def itenerario(a1:String,a2:String): List[Vuelo] ={
 
-   for(c<-vuelosA1 if (c.Org==a1 && c.Dst==a2) )yield c
+   val ls=for(c<-vuelosA1 if (c.Org==a1 ) )yield c
+
+
+    def itinerarioAux(a2:String,a3:String): List[Vuelo]={
+
+  val ls1= vuelosA1.filter(a=>(a.Org==a2  &&a.Dst==a3));
+      ls1
+
+      }
+   def itinerarioAuxiliar(xs: List[Vuelo],a2:String,a3:String): List[Vuelo]={
+
+    xs match {
+      case List()=>xs
+      case x::xy=> if(x.Dst==a3) itinerarioAux(x.Org,x.Dst) else if(x.Dst!=a3 &&a2==a3 ) x::itinerarioAux(x.Dst,a3)else itinerarioAuxiliar(xy,a2, a3)
+    }
+}
+    itinerarioAuxiliar(ls,a2,a2);
 
   }
+
+
+  /*def itinerarios(a1:String, a2:String):(List[Vuelo], List[Equals]) =
+  {
+    def itinerariosEscala(a1: String, a2:String):List[List[Equals]] = {
+      val v1 = vuelosA2.filter(a => a.Org == a1 && a.Dst != a2).map(_.Dst)
+      val v2 = vuelosA2.filter(a => a.Org == a1 && a.Dst != a2)
+      val v3 = for (i <- v1) yield vuelosA2.filter(a => (a.Org == i) && (a.Dst == a2))
+      List(v2, v3)
+    }
+    //sacar el nombre de los aeropuertos
+    //buscar en la lista de vuelos cuales tienen en el nombre de los dos aeropuertos en el orden correcto
+    //sacar esos vuelos en una lista
+    val listaV = Nil
+    val listaA=aeropuertos
+    val existe = !listaA.filter(a => a.Cod == a1).isEmpty && !listaA.filter(a => a.Cod == a2).isEmpty
+    if(existe)
+    {
+      (vuelosA2.filter(a => (a.Org == a1) && (a.Dst == a2)), itinerariosEscala(a1, a2).flatten)
+    }
+    else
+    {
+      throw new Exception("El codigo de vuelo no existe")
+    }
+  }*/
 
   //Busca los intenierarios de menor tiempo , al menos 3
   def itinerariosTiempo(a1: String, a2:String ): List[Vuelo] ={
      val ls=itenerario(a1,a2);
 
-    ls.sortBy(r => (((((r.HS)*60)+r.MS)-(((r.HL)*60)+r.ML)).abs,r.Esc)).take(3)
 
+
+   /* ls match {
+      case Nil=>Nil
+      case y::ys =>if (y.HS>y.HS) y::itenerario;
+    }
+
+
+
+*/
+//for (c<-ls if(c.HS==0) yield c=ls.updated(1,c.HS))
+    ls.updated(1,ls.indexOf());
+    //println(horaSalidaAuxiliar(ls, a1))
+    //ls.filter(r=>(r.HS<5))
+   /* for (d<-ls ){
+      println(horaSalidaAuxiliar(d))
+    }
+*/
+
+    for(a<-ls){
+
+      ls match {
+        case List()=>ls
+        case y::ys => if(y.Org=="assa") println(y) else println(ys)
+      }
+    }
+
+
+    ls.sortBy(r => ((((horaSalidaAuxiliar(r)*60)+r.MS)-(((horaLlegadaAuxiliar(r))*60)+r.ML)).abs,r.Esc)).reverse
+
+     }
+  def horaSalidaAuxiliar(ls:(Vuelo)): Int= {
+     /* case s::res=> if (s.Org==a1) s::horaSalidaAuxiliar(res,a1) else horaSalidaAuxiliar(res,a1)
+      case List()=>ls.updated()
+*/
+    val num=for (a<-aeropuertos if(ls.Org==a.Cod)) yield (a.GMT)+ls.HS
+    var num2=num.apply(0);
+    if (num2>24){
+      num2=num2-24;
+      num2
+    }else{
+      if(num2<0){
+        num2=num2+24;
+        num2
+      }else{
+        num2
+      }
+    }
+  }
+  def horaLlegadaAuxiliar(ls:(Vuelo)): Int= {
+
+    val num=for (a<-aeropuertos if(ls.Dst==a.Cod)) yield (a.GMT)+ls.HS
+    var num2=num.apply(0);
+    if (num2>24){
+      num2=num2-24;
+      num2
+    }else{
+      if(num2<0){
+        num2=num2+24;
+        num2
+      }else{
+        num2
+      }
+    }
   }
 
 
@@ -160,7 +286,7 @@ package object paquete {
 //Optimizacion en horario de salida
   def itenerariosSalida(a1:String,a2:String,h:Int,m:Int): List[Vuelo] = {
 
-   val ls= for (c <- itenerario(a1, a2) if (((h * 60) + m) < ((c.HL * 60) + c.ML))) yield c
+   val ls= for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
   ls.sortBy(r=>(r.HS)).reverse.take(1);
 
   }

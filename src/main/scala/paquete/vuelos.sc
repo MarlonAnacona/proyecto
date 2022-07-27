@@ -2,10 +2,11 @@ import paquete._;
 
 
 
- println(itenerario("MSY","HOU"));
- println(itinerariosCambios("MSY","HOU"))
- println(itinerariosTiempo("MSY","HOU"));
- println(itenerariosSalida("MSY","HOU",17,30));
+      println(itenerario("ATL","BOS"));
+  println(itenerario("MSY","HOU"));
+ //println(itinerariosTiempo("MSY","HOU"));
+ //println(itinerariosCambios("MSY","HOU"))
+   //println(itenerariosSalida("MSY","HOU",17,30));
 
  // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
   //case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
