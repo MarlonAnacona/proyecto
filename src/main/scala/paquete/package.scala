@@ -1,14 +1,14 @@
-import paquete.Vuelo
 
-import scala.collection.convert.ImplicitConversions.`seq AsJavaList`
 
 package object paquete {
 
-abstract  class  aero
-  case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int) extends aero
-  case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int) extends  aero
+  abstract class aero
 
-  val aeropuertos=List(
+  case class Aeropuerto(Cod: String, X: Int, Y: Int, GMT: Int) extends aero
+
+  case class Vuelo(Aln: String, Num: Int, Org: String, HS: Int, MS: Int, Dst: String, HL: Int, ML: Int, Esc: Int) extends aero
+
+  val aeropuertos = List(
     Aeropuerto("ABQ", 195, 275, -8),
     Aeropuerto("ATL", 470, 280, -6),
     Aeropuerto("BNA", 430, 240, -7),
@@ -38,7 +38,7 @@ abstract  class  aero
 
   //longitud
 
-  val vuelosA1= List(
+  val vuelosA1 = List(
     Vuelo("4X", 373, "HOU", 13, 15, "MSY", 15, 10, 1),
     Vuelo("4X", 201, "MSY", 8, 35, "HOU", 12, 20, 2),
     Vuelo("4X", 372, "MSY", 11, 0, "HOU", 12, 55, 1),
@@ -53,7 +53,7 @@ abstract  class  aero
     Vuelo("AA", 828, "MSY", 17, 10, "BNA", 18, 37, 0),
     Vuelo("AA", 212, "DFW", 17, 21, "ORD", 19, 41, 0),
     Vuelo("AA", 673, "ORD", 21, 30, "SEA", 12, 7, 0),
-    Vuelo("AA", 25, "DFW", 18, 37, "PHX", 10, 1, 0) ,
+    Vuelo("AA", 25, "DFW", 18, 37, "PHX", 10, 1, 0),
     Vuelo("AA", 35, "RDU", 14, 10, "MIA", 16, 21, 0),
     Vuelo("AA", 179, "ORD", 18, 30, "PHX", 11, 12, 0),
     Vuelo("AA", 580, "SFO", 12, 25, "ORD", 11, 5, 1),
@@ -73,7 +73,7 @@ abstract  class  aero
     Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
   )
 
-  val vuelosA2= List(
+  val vuelosA2 = List(
     Vuelo("AA", 35, "RDU", 14, 10, "MIA", 16, 21, 0),
     Vuelo("AA", 179, "ORD", 18, 30, "PHX", 11, 12, 0),
     Vuelo("AA", 580, "SFO", 12, 25, "ORD", 11, 5, 1),
@@ -95,7 +95,7 @@ abstract  class  aero
   //(("ATL","DFW"),(DFW,BOS),(DFW,BOS))
   //((("ATL","DFW"),(DFW,BOS)),(("ATL","DFW"),(DFW,BOS)))
 
-  val vuelosA3= List(
+  val vuelosA3 = List(
     Vuelo("AA", 400, "LAX", 7, 30, "MIA", 15, 30, 0),
     Vuelo("AA", 978, "MIA", 8, 10, "MSY", 12, 4, 0),
     Vuelo("AA", 348, "ORD", 6, 15, "DFW", 13, 6, 0),
@@ -113,7 +113,7 @@ abstract  class  aero
     Vuelo("AA", 379, "BOS", 6, 15, "ORD", 15, 4, 0)
   )
 
-  val vuelosA4= List(
+  val vuelosA4 = List(
     Vuelo("AA", 27, "MIA", 8, 0, "SEA", 11, 27, 0),
     Vuelo("AA", 1, "JFK", 9, 0, "LAX", 11, 39, 0),
     Vuelo("AA", 272, "HOU", 7, 25, "DFW", 13, 7, 0),
@@ -131,7 +131,7 @@ abstract  class  aero
     Vuelo("AA", 315, "ORD", 17, 30, "BNA", 18, 54, 0)
   )
 
-  val vuelosA5= List(
+  val vuelosA5 = List(
     Vuelo("AA", 856, "DFW", 14, 30, "HOU", 15, 39, 0),
     Vuelo("AA", 846, "DFW", 17, 16, "DCA", 11, 4, 0),
     Vuelo("AA", 745, "MIA", 16, 48, "DFW", 19, 5, 0),
@@ -148,29 +148,44 @@ abstract  class  aero
     Vuelo("AA", 201, "PHL", 7, 24, "DFW", 10, 0, 0),
     Vuelo("AA", 59, "JFK", 8, 0, "SFO", 11, 33, 0)
   )
+
+  type itn = List[Vuelo]
+
   //devuelve la ruta
-  def itenerario(a1:String,a2:String): List[Vuelo] ={
+  def itenerario(a1: String, a2: String): List[itn] = {
 
-   val ls=for(c<-vuelosA1 if (c.Org==a1 ) )yield c
-
-
-    def itinerarioAux(a2:String,a3:String): List[Vuelo]={
-
-  val ls1= vuelosA1.filter(a=>(a.Org==a2  &&a.Dst==a3));
-      ls1
-
-      }
-   def itinerarioAuxiliar(xs: List[Vuelo],a2:String,a3:String): List[Vuelo]={
-
-    xs match {
-      case List()=>xs
-      case x::xy=> if(x.Dst==a3) itinerarioAux(x.Org,x.Dst) else if(x.Dst!=a3 &&a2==a3 ) x::itinerarioAux(x.Dst,a3)else itinerarioAuxiliar(xy,a2, a3)
+    def filtroDirect(a:String , x:List[Vuelo]):List[Vuelo]={
+      for (c <- x if (c.Org == a)) yield c
     }
-}
-    itinerarioAuxiliar(ls,a2,a2);
+
+    def filtroEScalas(x:List[Vuelo],a3:String):List[Vuelo]={
+      for(c<-x if !(c.Org==a3 || c.Dst==a3)) yield c
+    }
+
+    def filtroFInal(x:List[itn]):List[itn]={
+      for(c<- x if(c.last.Dst==a2) ) yield c
+    }
+
+    def itinerarioAuxiliar(xs: List[Vuelo], a2: String): List[itn] = {
+      if (xs.isEmpty) {
+        List(xs)
+      } else {
+        val vueloOrigen = filtroDirect(a2, xs)
+        val vueloEscala = for {
+          i <- vueloOrigen
+          m <- itinerarioAuxiliar(filtroEScalas(xs,a2), i.Dst)
+
+        } yield i::m
+        vueloOrigen.map(r=>List(r))++vueloEscala
+      }
+    }
+
+    filtroFInal(itinerarioAuxiliar(vuelosA1,a1));
 
   }
 
+  // tiempo en vuelo (incluido tiempo espera) = suma de todos los horarios
+  // tiempo
 
   /*def itinerarios(a1:String, a2:String):(List[Vuelo], List[Equals]) =
   {
@@ -197,70 +212,71 @@ abstract  class  aero
   }*/
 
   //Busca los intenierarios de menor tiempo , al menos 3
-  def itinerariosTiempo(a1: String, a2:String ): List[Vuelo] ={
-     val ls=itenerario(a1,a2);
+  /*def itinerariosTiempo(a1: String, a2: String): List[Vuelo] = {
+    val ls = itenerario(a1, a2);
+
+
+    /* ls match {
+       case Nil=>Nil
+       case y::ys =>if (y.HS>y.HS) y::itenerario;
+     }
 
 
 
-   /* ls match {
-      case Nil=>Nil
-      case y::ys =>if (y.HS>y.HS) y::itenerario;
-    }
-
-
-
-*/
-//for (c<-ls if(c.HS==0) yield c=ls.updated(1,c.HS))
-    ls.updated(1,ls.indexOf());
+ */
+    //for (c<-ls if(c.HS==0) yield c=ls.updated(1,c.HS))
+    ls.updated(1, ls.indexOf());
     //println(horaSalidaAuxiliar(ls, a1))
     //ls.filter(r=>(r.HS<5))
-   /* for (d<-ls ){
-      println(horaSalidaAuxiliar(d))
-    }
-*/
+    /* for (d<-ls ){
+       println(horaSalidaAuxiliar(d))
+     }
+ */
 
-    for(a<-ls){
+    for (a <- ls) {
 
       ls match {
-        case List()=>ls
-        case y::ys => if(y.Org=="assa") println(y) else println(ys)
+        case List() => ls
+        case y :: ys => if (y.Org == "assa") println(y) else println(ys)
       }
     }
 
 
-    ls.sortBy(r => ((((horaSalidaAuxiliar(r)*60)+r.MS)-(((horaLlegadaAuxiliar(r))*60)+r.ML)).abs,r.Esc)).reverse
+    ls.sortBy(r => ((((horaSalidaAuxiliar(r) * 60) + r.MS) - (((horaLlegadaAuxiliar(r)) * 60) + r.ML)).abs, r.Esc)).reverse
 
-     }
-  def horaSalidaAuxiliar(ls:(Vuelo)): Int= {
-     /* case s::res=> if (s.Org==a1) s::horaSalidaAuxiliar(res,a1) else horaSalidaAuxiliar(res,a1)
-      case List()=>ls.updated()
+  }
+
+  def horaSalidaAuxiliar(ls: (Vuelo)): Int = {
+    /* case s::res=> if (s.Org==a1) s::horaSalidaAuxiliar(res,a1) else horaSalidaAuxiliar(res,a1)
+     case List()=>ls.updated()
 */
-    val num=for (a<-aeropuertos if(ls.Org==a.Cod)) yield (a.GMT)+ls.HS
-    var num2=num.apply(0);
-    if (num2>24){
-      num2=num2-24;
+    val num = for (a <- aeropuertos if (ls.Org == a.Cod)) yield (a.GMT) + ls.HS
+    var num2 = num.apply(0);
+    if (num2 > 24) {
+      num2 = num2 - 24;
       num2
-    }else{
-      if(num2<0){
-        num2=num2+24;
+    } else {
+      if (num2 < 0) {
+        num2 = num2 + 24;
         num2
-      }else{
+      } else {
         num2
       }
     }
   }
-  def horaLlegadaAuxiliar(ls:(Vuelo)): Int= {
 
-    val num=for (a<-aeropuertos if(ls.Dst==a.Cod)) yield (a.GMT)+ls.HS
-    var num2=num.apply(0);
-    if (num2>24){
-      num2=num2-24;
+  def horaLlegadaAuxiliar(ls: (Vuelo)): Int = {
+
+    val num = for (a <- aeropuertos if (ls.Dst == a.Cod)) yield (a.GMT) + ls.HS
+    var num2 = num.apply(0);
+    if (num2 > 24) {
+      num2 = num2 - 24;
       num2
-    }else{
-      if(num2<0){
-        num2=num2+24;
+    } else {
+      if (num2 < 0) {
+        num2 = num2 + 24;
         num2
-      }else{
+      } else {
         num2
       }
     }
@@ -268,27 +284,28 @@ abstract  class  aero
 
 
   //El menor cambio de avion de los itenerarios
-  def itinerariosCambios(a1:String,a2:String):  List[Vuelo] ={
+  def itinerariosCambios(a1: String, a2: String): List[Vuelo] = {
 
-    val ls=itenerario(a1,a2);
+    val ls = itenerario(a1, a2);
 
     ls.sortBy(r => (r.Esc)).take(3);
   }
 
   //Itenerarios con menor  el tiempo de vuelo
-  def itenerarioDistancia(a1:String,a2:String): List[Vuelo]  ={
+  def itenerarioDistancia(a1: String, a2: String): List[Vuelo] = {
 
-    val ls=itenerario(a1,a2);
+    val ls = itenerario(a1, a2);
 
-    ls.sortBy(r => ((((r.HS)*60)+r.MS)-(((r.HL)*60)+r.ML)).abs).take(3);
-
-  }
-//Optimizacion en horario de salida
-  def itenerariosSalida(a1:String,a2:String,h:Int,m:Int): List[Vuelo] = {
-
-   val ls= for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
-  ls.sortBy(r=>(r.HS)).reverse.take(1);
+    ls.sortBy(r => ((((r.HS) * 60) + r.MS) - (((r.HL) * 60) + r.ML)).abs).take(3);
 
   }
 
+  //Optimizacion en horario de salida
+  def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[Vuelo] = {
+
+    val ls = for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
+    ls.sortBy(r => (r.HS)).reverse.take(1);
+
+  }
+*/
 }

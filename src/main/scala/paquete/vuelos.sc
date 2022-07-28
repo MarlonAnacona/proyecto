@@ -2,8 +2,8 @@ import paquete._;
 
 
 
-      println(itenerario("ATL","BOS"));
-  println(itenerario("MSY","HOU"));
+      (itenerario("ATL","BOS"));
+  itenerario("MSY","HOU")
  //println(itinerariosTiempo("MSY","HOU"));
  //println(itinerariosCambios("MSY","HOU"))
    //println(itenerariosSalida("MSY","HOU",17,30));
