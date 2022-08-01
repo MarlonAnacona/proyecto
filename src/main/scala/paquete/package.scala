@@ -200,7 +200,6 @@ package object paquete {
 
 
       if (diferenciaHorasSalida.length > 1) {
-        println(horaDiferenciaEscalas(dia(diferenciaHorasSalida), diferenciaHorasSalida))
         horaDiferenciaEscalas(dia(diferenciaHorasSalida), diferenciaHorasSalida)
       } else {
 
@@ -212,7 +211,6 @@ package object paquete {
     }
 
     def horaDiferenciaEscalas(dia: Int, horas: List[(Int, Int)]): Int = {
-
       horas.last._2 + ((24 * dia) - horas.head._1)
     }
 
@@ -317,24 +315,33 @@ ls.sortBy(r=> tiempoAux(r)).take(3)
     }
   }
 
-  /*
+
     //El menor cambio de avion de los itenerarios
-    def itinerariosCambios(a1: String, a2: String): List[Vuelo] = {
+    def itinerariosCambios(a1: String, a2: String): List[itn] = {
 
       val ls = itenerario(a1, a2);
 
-      ls.sortBy(r => (r.Esc)).take(3);
+      def numeroEscalas(xs: itn) : Int ={
+
+        val numeroEscalasVuelo=for {
+          i<-xs
+        } yield i.Esc
+
+        var numEsc=numeroEscalasVuelo.sum +(xs.length-1)
+      numEsc
+      }
+      ls.sortBy(r => (numeroEscalas(r))).take(3);
     }
 
     //Itenerarios con menor  el tiempo de vuelo
-    def itenerarioDistancia(a1: String, a2: String): List[Vuelo] = {
+    def itenerarioDistancia(a1: String, a2: String): List[itn] = {
 
       val ls = itenerario(a1, a2);
 
-      ls.sortBy(r => ((((r.HS) * 60) + r.MS) - (((r.HL) * 60) + r.ML)).abs).take(3);
+     // ls.sortBy(r => ((((r.HS) * 60) + r.MS) - (((r.HL) * 60) + r.ML)).abs).take(3);
 
     }
-
+/*
     //Optimizacion en horario de salida
     def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[Vuelo] = {
 

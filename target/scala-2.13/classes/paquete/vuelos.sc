@@ -5,8 +5,9 @@ import paquete._;
 (itenerario("ATL","BOS"));
  //itinerariosTiempo("MSY","HOU");
 itinerariosTiempo("ATL","BOS");
-  //println(itinerariosTiempo("MSY","HOU"));
- //println(itinerariosCambios("MSY","HOU"))
+  itinerariosCambios("MSY","HOU")
+   itinerariosCambios("ATL","BOS")
+//itinerariosCambios("MSY","HOU")
    //println(itenerariosSalida("MSY","HOU",17,30));
 
  // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
