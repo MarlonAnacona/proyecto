@@ -69,6 +69,8 @@ package object paquete {
     Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
 
     Vuelo("AA", 203, "DFW", 8, 10, "BOS", 14, 7, 0),
+
+
     Vuelo("AA", 334, "RDU", 9, 0, "PVD", 10, 40, 0),
     Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
   )
@@ -186,7 +188,7 @@ package object paquete {
 
 
   //Busca los intenierarios de menor tiempo , al menos 3
-  def itinerariosTiempo(a1: String, a2: String): Int = {
+  def itinerariosTiempo(a1: String, a2: String): List[itn] = {
     val ls = itenerario(a1, a2);
 
     def tiempoAux(xs: itn): Int = {
@@ -195,11 +197,15 @@ package object paquete {
         i <- xs
       } yield (horaSalidaAuxiliar(i), horaLlegadaAuxiliar(i))
 
+
+
       if (diferenciaHorasSalida.length > 1) {
+        println(horaDiferenciaEscalas(dia(diferenciaHorasSalida), diferenciaHorasSalida))
         horaDiferenciaEscalas(dia(diferenciaHorasSalida), diferenciaHorasSalida)
       } else {
 
         horadifenciaUnDia(diferenciaHorasSalida)
+
       }
 
 
@@ -223,25 +229,53 @@ package object paquete {
 
 
     def dia(xy: List[(Int, Int)]): Int = {
+
       if (xy.isEmpty) {
         0
       } else {
-        if (xy.head._1 > xy.head._2) {
+        if (xy.length==1){
+          if (xy.head._1 > xy.head._2) {
+            1 + dia(xy.tail)
+          }else{
+            0+dia(xy.tail)
+          }
+        } else{
+          if (xy.head._1 > xy.head._2) {
           1 + dia(xy.tail)
         } else {
-          if (xy.head._2 > xy.tail.head._1) {
+            if (xy.head._2 > xy.tail.head._1) {
             1 + dia(xy.tail)
           } else {
-            0 + dia(xy.tail)
+           0 + dia(xy.tail)
           }
         }
       }
+      }
     }
 
-    println(ls)
-    tiempoAux(ls.apply(0))
+/*
+    def insertar(x: Int, xs1: List[itn],xx:itn): List[itn] = {
+      println(x)
+println(xx)
+      xs1 match {
+        case List() => List()
+        case y :: ys => if (x < (tiempoAux(y))) xx :: xs1 else y :: insertar(x, ys,xx)
 
-    //ls.sortBy(r => ((((horaSalidaAuxiliar(r) * 60) + r.MS) - (((horaLlegadaAuxiliar(r)) * 60) + r.ML)).abs, r.Esc)).reverse
+      }
+    }*/
+    /*def organizar(xs: List[itn]): List[itn] = {
+      /*xs match {
+        case List() => List()
+        case y::ys => insertar(tiempoAux(y),organizar(ys),y)
+      }
+*/
+
+
+    }*/
+     //println(tiempoAux(ls.tail.head))
+    //organizar(ls)
+ls.sortBy(r=> tiempoAux(r)).take(3)
+
 
   }
 
