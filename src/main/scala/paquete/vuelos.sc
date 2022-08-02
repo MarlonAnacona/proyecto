@@ -7,6 +7,7 @@ import paquete._;
 itinerariosTiempo("ATL","BOS");
   itinerariosCambios("MSY","HOU")
    itinerariosCambios("ATL","BOS")
+ itenerarioDistancia("ATL","BOS")
 //itinerariosCambios("MSY","HOU")
    //println(itenerariosSalida("MSY","HOU",17,30));
 

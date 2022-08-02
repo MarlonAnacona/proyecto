@@ -198,7 +198,6 @@ package object paquete {
       } yield (horaSalidaAuxiliar(i), horaLlegadaAuxiliar(i))
 
 
-
       if (diferenciaHorasSalida.length > 1) {
         horaDiferenciaEscalas(dia(diferenciaHorasSalida), diferenciaHorasSalida)
       } else {
@@ -231,48 +230,28 @@ package object paquete {
       if (xy.isEmpty) {
         0
       } else {
-        if (xy.length==1){
+        if (xy.length == 1) {
           if (xy.head._1 > xy.head._2) {
-            1 + dia(xy.tail)
-          }else{
-            0+dia(xy.tail)
-          }
-        } else{
-          if (xy.head._1 > xy.head._2) {
-          1 + dia(xy.tail)
-        } else {
-            if (xy.head._2 > xy.tail.head._1) {
             1 + dia(xy.tail)
           } else {
-           0 + dia(xy.tail)
+            0 + dia(xy.tail)
+          }
+        } else {
+          if (xy.head._1 > xy.head._2) {
+            1 + dia(xy.tail)
+          } else {
+            if (xy.head._2 > xy.tail.head._1) {
+              1 + dia(xy.tail)
+            } else {
+              0 + dia(xy.tail)
+            }
           }
         }
       }
-      }
     }
 
-/*
-    def insertar(x: Int, xs1: List[itn],xx:itn): List[itn] = {
-      println(x)
-println(xx)
-      xs1 match {
-        case List() => List()
-        case y :: ys => if (x < (tiempoAux(y))) xx :: xs1 else y :: insertar(x, ys,xx)
 
-      }
-    }*/
-    /*def organizar(xs: List[itn]): List[itn] = {
-      /*xs match {
-        case List() => List()
-        case y::ys => insertar(tiempoAux(y),organizar(ys),y)
-      }
-*/
-
-
-    }*/
-     //println(tiempoAux(ls.tail.head))
-    //organizar(ls)
-ls.sortBy(r=> tiempoAux(r)).take(3)
+    ls.sortBy(r => tiempoAux(r)).take(3)
 
 
   }
@@ -316,38 +295,68 @@ ls.sortBy(r=> tiempoAux(r)).take(3)
   }
 
 
-    //El menor cambio de avion de los itenerarios
-    def itinerariosCambios(a1: String, a2: String): List[itn] = {
+  //El menor cambio de avion de los itenerarios
+  def itinerariosCambios(a1: String, a2: String): List[itn] = {
 
-      val ls = itenerario(a1, a2);
+    val ls = itenerario(a1, a2);
 
-      def numeroEscalas(xs: itn) : Int ={
+    def numeroEscalas(xs: itn): Int = {
 
-        val numeroEscalasVuelo=for {
-          i<-xs
-        } yield i.Esc
+      val numeroEscalasVuelo = for {
+        i <- xs
+      } yield i.Esc
 
-        var numEsc=numeroEscalasVuelo.sum +(xs.length-1)
+      var numEsc = numeroEscalasVuelo.sum + (xs.length - 1)
       numEsc
+    }
+
+    ls.sortBy(r => (numeroEscalas(r))).take(3);
+  }
+
+  //Itenerarios con menor  el tiempo de vuelo
+  def itenerarioDistancia(a1: String, a2: String): List[itn] = {
+
+    val ls = itenerario(a1, a2);
+
+
+    def tiempoAux(xs: itn): Int = {
+
+      val diferenciaHorasSalida = for {
+        i <- xs
+      } yield (horaSalidaAuxiliar(i), horaLlegadaAuxiliar(i))
+
+      horadifenciaUnDia(diferenciaHorasSalida)
+
+    }
+
+
+    def horadifenciaUnDia(horas: List[(Int, Int)]): Int = {
+      if (horas.isEmpty) {
+        0
+       } else {
+        if (horas.head._2 < horas.head._1) {
+          horas.head._2 + ((24) - horas.head._1) + horadifenciaUnDia(horas.tail)
+        } else {
+          val horafinal = horas.head._2 - horas.head._1 + horadifenciaUnDia(horas.tail)
+          horafinal
+        }
       }
-      ls.sortBy(r => (numeroEscalas(r))).take(3);
+    }
+     ls.sortBy(r=> tiempoAux(r))
+
     }
 
-    //Itenerarios con menor  el tiempo de vuelo
-    def itenerarioDistancia(a1: String, a2: String): List[itn] = {
 
-      val ls = itenerario(a1, a2);
 
-     // ls.sortBy(r => ((((r.HS) * 60) + r.MS) - (((r.HL) * 60) + r.ML)).abs).take(3);
 
-    }
-/*
-    //Optimizacion en horario de salida
-    def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[Vuelo] = {
+      //Optimizacion en horario de salida
+      def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[Vuelo] = {
+    val ls= itenerario(a1,a2)
 
-      val ls = for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
-      ls.sortBy(r => (r.HS)).reverse.take(1);
+      //  val ls = for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
+       // ls.sortBy(r => (r.HS)).reverse.take(1);
 
-    }
-    */
+
+      }
+
 }
