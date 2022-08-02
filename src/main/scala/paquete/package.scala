@@ -68,7 +68,7 @@ package object paquete {
     Vuelo("AA", 837, "ATL", 7, 25, "DFW", 13, 5, 0),
     Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
 
-    Vuelo("AA", 203, "DFW", 8, 10, "BOS", 14, 7, 0),
+    Vuelo("AA", 203, "DFW", 8, 10, "BOS", 11, 0, 0),
 
 
     Vuelo("AA", 334, "RDU", 9, 0, "PVD", 10, 40, 0),
@@ -189,7 +189,7 @@ package object paquete {
 
   //Busca los intenierarios de menor tiempo , al menos 3
   def itinerariosTiempo(a1: String, a2: String): List[itn] = {
-    val ls = itenerario(a1, a2);
+
 
     def tiempoAux(xs: itn): Int = {
 
@@ -251,7 +251,7 @@ package object paquete {
     }
 
 
-    ls.sortBy(r => tiempoAux(r)).take(3)
+    itenerario(a1, a2).sortBy(r => tiempoAux(r)).take(3)
 
 
   }
@@ -298,7 +298,6 @@ package object paquete {
   //El menor cambio de avion de los itenerarios
   def itinerariosCambios(a1: String, a2: String): List[itn] = {
 
-    val ls = itenerario(a1, a2);
 
     def numeroEscalas(xs: itn): Int = {
 
@@ -306,17 +305,15 @@ package object paquete {
         i <- xs
       } yield i.Esc
 
-      var numEsc = numeroEscalasVuelo.sum + (xs.length - 1)
-      numEsc
+      numeroEscalasVuelo.sum + (xs.length - 1)
+
     }
 
-    ls.sortBy(r => (numeroEscalas(r))).take(3);
+    itenerario(a1, a2).sortBy(r => (numeroEscalas(r))).take(3);
   }
 
   //Itenerarios con menor  el tiempo de vuelo
   def itenerarioDistancia(a1: String, a2: String): List[itn] = {
-
-    val ls = itenerario(a1, a2);
 
 
     def tiempoAux(xs: itn): Int = {
@@ -333,7 +330,7 @@ package object paquete {
     def horadifenciaUnDia(horas: List[(Int, Int)]): Int = {
       if (horas.isEmpty) {
         0
-       } else {
+      } else {
         if (horas.head._2 < horas.head._1) {
           horas.head._2 + ((24) - horas.head._1) + horadifenciaUnDia(horas.tail)
         } else {
@@ -342,21 +339,97 @@ package object paquete {
         }
       }
     }
-     ls.sortBy(r=> tiempoAux(r))
+
+    itenerario(a1, a2).sortBy(r => tiempoAux(r))
+
+  }
+
+
+  def horaLlegadaAuxiliarNecesaria(ls: (Vuelo), h: Int): Int = {
+
+    val num = for (a <- aeropuertos if (ls.Dst == a.Cod)) yield a.GMT + h
+    var num2 = num.apply(0);
+
+    if (num2 > 24) {
+      num2 = num2 - 24;
+      num2
+    } else {
+      if (num2 < 0) {
+        num2 = num2 + 24;
+        num2
+      } else {
+        num2
+      }
+    }
+  }
+
+
+  //Optimizacion en horario de salida
+  def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[itn] = {
+    // val ls= itenerario(a1,a2)
+
+
+    /*
+    Un itinerario que salga a1  y llegue a2, de tal manera que dado h:m. se llegue a tiempo a a2
+
+
+    6 AM SALIDA, 8 AM SALIDA.
+    1 NECESARIA , 12:30 LLEGADA VUELO
+
+    EL VUELO QUE SALGA DE a1 MAS TARDE.
+
+
+
+
+*/
+    /* def aux(horallegada:Int,horaNecesaria:Int,minutosllegada:Int,minutosNecesario:Int ): Int ={
+
+
+       if(horaNecesaria<horallegada){
+         ((   horallegada+(24-horaNecesaria))*60) + minutosAuxiliar(minutosllegada,minutosNecesario)
+       }else{
+         if(horallegada==horaNecesaria){
+           0+minutosAuxiliar(minutosllegada,minutosllegada)
+         }else{
+           var s=horallegada-horaNecesaria
+           ( (s*60)+minutosAuxiliar(minutosllegada,minutosNecesario)).abs
+         }
+
+       }
+
+      }
+
+      def minutosAuxiliar(minutollegada:Int,minutoNecesario:Int): Int ={
+        if(minutollegada<minutoNecesario){
+          var minFinal=(60-minutoNecesario)+minutollegada
+          minFinal
+        }else{
+          if(minutollegada>minutoNecesario){
+            var minFinal=minutollegada-minutoNecesario
+            minFinal
+          }else{
+            0
+          }
+        }
+      }
+*/
+
+    val ls = for (c <- itenerario(a1, a2) if (((horaLlegadaAuxiliarNecesaria(c.last, h) * 60) + m) >= ((horaLlegadaAuxiliar(c.last) * 60) + c.last.ML))) yield c
+
+
+    if (ls.head.length == 1) {
+      ls.sortBy(r => r.head.HS).reverse.take(1)
+
+    } else {
+      //ls.sortBy(r => (horaSalidaAuxiliar(r.head),horaSalidaAuxiliar(r.last)))
+      ls.sortBy(r => (r.head.HS, r.last.HS)).reverse
 
     }
 
+    //ls.filter(r=> (horaLlegadaAuxiliar(r.last)*60)<h)
+    //ls.sortBy(r=>(aux(horaLlegadaAuxiliar(r.last),horaLlegadaAuxiliarNecesaria(r.last,h),r.last.ML,m),horaSalidaAuxiliar(r.head)))
 
 
-
-      //Optimizacion en horario de salida
-      def itenerariosSalida(a1: String, a2: String, h: Int, m: Int): List[Vuelo] = {
-    val ls= itenerario(a1,a2)
-
-      //  val ls = for (c <- itenerario(a1, a2) if (((h * 60) + m) <= ((c.HL * 60) + c.ML))) yield c
-       // ls.sortBy(r => (r.HS)).reverse.take(1);
-
-
-      }
+  }
 
 }

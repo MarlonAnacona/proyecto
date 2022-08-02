@@ -7,9 +7,11 @@ import paquete._;
 itinerariosTiempo("ATL","BOS");
   itinerariosCambios("MSY","HOU")
    itinerariosCambios("ATL","BOS")
- itenerarioDistancia("ATL","BOS")
+  itenerarioDistancia("ATL","BOS")
 //itinerariosCambios("MSY","HOU")
-   //println(itenerariosSalida("MSY","HOU",17,30));
+
+  itenerariosSalida("MSY","HOU",13,0);
+  itenerariosSalida("ATL","BOS",11,0);
 
  // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
   //case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
