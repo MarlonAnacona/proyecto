@@ -334,8 +334,7 @@ package object paquete {
         if (horas.head._2 < horas.head._1) {
           horas.head._2 + ((24) - horas.head._1) + horadifenciaUnDia(horas.tail)
         } else {
-          val horafinal = horas.head._2 - horas.head._1 + horadifenciaUnDia(horas.tail)
-          horafinal
+          horas.head._2 - horas.head._1 + horadifenciaUnDia(horas.tail)
         }
       }
     }
