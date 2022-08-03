@@ -13,11 +13,11 @@ itinerariosTiempo("ATL","BOS");
   itenerariosSalida("MSY","HOU",13,0);
   itenerariosSalida("ATL","BOS",11,0);
 
- // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
-  //case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
-
-
-  //________________________________________________________
+(itenerarioPar("ATL","BOS"))
+itinerariosTiempoPar("ATL","BOS");
+itinerariosCambiosPar("MSY","HOU")
+itinerariosCambiosPar("ATL","BOS")
+itenerarioDistanciaPar("ATL","BOS")
 
   //longitud 15
 /*
