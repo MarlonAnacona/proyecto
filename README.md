@@ -35,7 +35,7 @@ PhotoCanvas.scala:
 
 En este archivo asocio la interfaz con la programación funcional, en el cual desde la interfaz mando a photocanvas y esta ultima llama la funcion de package que se necesita utilizar para que mande respuesta a la interfaz
 
-Interfas.scala:
+Interfaz.scala:
 
 Aqui solamente se hace la interfaz grafica y una serie de componentes para hacer mas facil la interacción del programa con el usuario.
 

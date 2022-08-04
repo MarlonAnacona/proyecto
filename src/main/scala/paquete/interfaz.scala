@@ -1,10 +1,9 @@
 package paquete
 
-import org.scalameter.{Key, Warmer, config, measure}
+import org.scalameter.{Key, Warmer, config}
 
 import java.awt.event.{ActionEvent, ActionListener}
 import java.awt.{BorderLayout, GridLayout}
-import java.sql.Struct
 import javax.swing._
 
 object ScalaShop {
@@ -67,7 +66,7 @@ object ScalaShop {
     ))
     controls.add(filtroOrigen)
 
-    val Destino = new JLabel("Origen")
+    val Destino = new JLabel("Destino")
     controls.add(Destino)
     val filtroDestino = new JComboBox(Array(
       "ABQ",
