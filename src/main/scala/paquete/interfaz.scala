@@ -7,7 +7,7 @@ import java.awt.{BorderLayout, GridLayout}
 import java.sql.Struct
 import javax.swing._
 
-object ScalaShop {
+object inter {
 
   class ScalaShopFrame extends JFrame("Itinerarios\u2122") {
 

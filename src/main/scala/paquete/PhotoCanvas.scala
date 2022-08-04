@@ -6,7 +6,7 @@ import java.awt.Graphics
 import java.awt.image.BufferedImage
 import javax.swing.{JComponent, JTextArea}
 import paquete.vuelosItinerarios
-import paquete.ScalaShop
+import paquete.inter
 class PhotoCanvas extends JComponent {
 
   val  vuelosItinerarios= new vuelosItinerarios ;
