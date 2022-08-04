@@ -1,7 +1,7 @@
 import paquete._;
 
 
-
+/*
 (itenerario("ATL","BOS"));
  //itinerariosTiempo("MSY","HOU");
 itinerariosTiempo("ATL","BOS");
@@ -18,7 +18,7 @@ itinerariosTiempoPar("ATL","BOS");
 itinerariosCambiosPar("MSY","HOU")
 itinerariosCambiosPar("ATL","BOS")
 itenerarioDistanciaPar("ATL","BOS")
-
+*/
   //longitud 15
 /*
   val vuelosA1= List(

@@ -1,7 +1,7 @@
 import paquete._;
 
 
-
+/*
 (itenerario("ATL","BOS"));
  //itinerariosTiempo("MSY","HOU");
 itinerariosTiempo("ATL","BOS");
@@ -18,12 +18,7 @@ itinerariosTiempoPar("ATL","BOS");
 itinerariosCambiosPar("MSY","HOU")
 itinerariosCambiosPar("ATL","BOS")
 itenerarioDistanciaPar("ATL","BOS")
- // case class Aeropuerto(Cod:String,X:Int,Y:Int,GMT:Int)
-  //case class Vuelo(Aln:String, Num:Int, Org:String, HS:Int, MS:Int, Dst:String, HL:Int, ML:Int, Esc:Int)
-
-
-  //________________________________________________________
-
+*/
   //longitud 15
 /*
   val vuelosA1= List(
