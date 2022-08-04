@@ -7,7 +7,7 @@ import java.awt.{BorderLayout, GridLayout}
 import java.sql.Struct
 import javax.swing._
 
-object inter {
+object ScalaShop {
 
   class ScalaShopFrame extends JFrame("Itinerarios\u2122") {
 
@@ -150,7 +150,7 @@ object inter {
 
     val respuesta = new JTextArea("")
     respuesta.setLineWrap(true)
-    respuesta.setSize(1270,300)
+    respuesta.setSize(1245,300)
     respuesta.setBorder(BorderFactory.createLoweredBevelBorder)
     leftPanel.add(respuesta, BorderLayout.NORTH)
 
