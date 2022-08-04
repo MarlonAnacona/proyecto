@@ -1,7 +1,11 @@
 Proyecto final - Planificacion de vuelos
 
-Mayra Alejandra Sanchez (2040506)
 Marlon Andres Anacona (2023777)
+
+Mayra Alejandra Sanchez (2040506)
+
+Maria Paula Giraldo (2022411)
+
 
 Uno de los problemas más frecuentes que encuentran los viajeros aéreos (por lo general delegan el encontrar su solución a una agencia de viajes) es el de organizar la ruta de viaje más adecuada para ir de un sitio a otro. Por adecuada se entiende que satisfaga los requerimientos del viajero:
 
