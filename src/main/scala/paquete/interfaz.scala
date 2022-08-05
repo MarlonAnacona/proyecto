@@ -66,7 +66,7 @@ object ScalaShop {
     ))
     controls.add(filtroOrigen)
 
-    val Destino = new JLabel("Destino")
+    val Destino = new JLabel("Destino ")
     controls.add(Destino)
     val filtroDestino = new JComboBox(Array(
       "ABQ",

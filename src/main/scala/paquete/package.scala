@@ -38,7 +38,7 @@ package object paquete {
 
     //________________________________________________________
 
-    //longitud
+    //longitud 15 vuelos
 
     val vuelosA1 = List(
       Vuelo("4X", 373, "HOU", 13, 15, "MSY", 15, 10, 1),
@@ -66,12 +66,13 @@ package object paquete {
       Vuelo("AA", 796, "DEN", 15, 7, "BNA", 18, 47, 0),
       Vuelo("AA", 89, "ORD", 18, 30, "LAX", 10, 35, 0),
       Vuelo("AA", 920, "MIA", 8, 44, "DCA", 11, 6, 0),
-      Vuelo("AA", 837, "ATL", 7, 25, "DFW", 13, 5, 0),
       Vuelo("AA", 728, "DFW", 6, 35, "BOS", 10, 58, 0),
-      Vuelo("AA", 203, "DFW", 8, 10, "BOS", 14, 7, 0),
+      Vuelo("AA", 837, "ATL", 7, 25, "DFW", 13, 5, 0),
+      Vuelo("AA", 203, "DFW", 8, 10, "SFO", 14, 7, 0),
       Vuelo("AA", 334, "RDU", 9, 0, "PVD", 10, 40, 0),
       Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
     )
+
 
     type itn = List[Vuelo]
 
@@ -389,15 +390,11 @@ package object paquete {
         }
       }
 
-
       itinerarioPar(a1, a2).sortBy(r => tiempoAux(r)).take(3).par.toList
-
 
     }
 
-
     def horaSalidaAuxiliarPar(ls: (Vuelo)): Int = {
-
 
       val num = for (a <- aeropuertos if (ls.Org == a.Cod)) yield (a.GMT/100) + ls.HS
       var num2 = num.apply(0);
