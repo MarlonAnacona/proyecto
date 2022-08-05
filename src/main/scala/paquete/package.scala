@@ -38,7 +38,7 @@ package object paquete {
 
     //________________________________________________________
 
-    //longitud 15 vuelos
+    /*longitud 30 vuelos
 
     val vuelosA1 = List(
       Vuelo("4X", 373, "HOU", 13, 15, "MSY", 15, 10, 1),
@@ -73,6 +73,50 @@ package object paquete {
       Vuelo("AA", 709, "ATL", 8, 28, "MIA", 10, 15, 0)
     )
 
+     */
+
+    val vuelosA1 = List(
+      Vuelo("AA", 717, "DFW", 20, 0, "LAX", 11, 7, 0),
+      Vuelo("AA", 960, "MIA", 19, 7, "ORD", 11, 33, 0),
+      Vuelo("AA", 350, "LAX", 1, 50, "DCA", 11, 46, 1),
+      Vuelo("AA", 566, "BNA", 13, 55, "BOS", 17, 19, 0),
+      Vuelo("AA", 976, "MIA", 13, 40, "ORD", 15, 55, 0),
+      Vuelo("AA", 391, "ORD", 14, 55, "SEA", 17, 22, 0),
+      Vuelo("AA", 834, "DFW", 20, 0, "DCA", 13, 36, 0),
+      Vuelo("AA", 397, "MIA", 13, 10, "BNA", 14, 29, 0),
+      Vuelo("AA", 50, "DEN", 13, 20, "DFW", 16, 24, 0),
+      Vuelo("AA", 184, "ORD", 14, 50, "DCA", 17, 33, 0),
+      Vuelo("AA", 870, "MSP", 8, 28, "ORD", 14, 5, 0),
+      Vuelo("AA", 374, "MSP", 14, 2, "MSY", 18, 43, 1),
+      Vuelo("AA", 750, "RDU", 19, 45, "PVD", 11, 22, 0),
+      Vuelo("AA", 687, "BNA", 14, 5, "MIA", 17, 25, 0),
+      Vuelo("AA", 283, "BNA", 19, 38, "ORD", 11, 16, 0),
+      Vuelo("AA", 530, "BNA", 19, 35, "BOS", 12, 54, 0),
+      Vuelo("AA", 325, "ORD", 20, 20, "SFO", 13, 14, 0),
+      Vuelo("AA", 333, "DFW", 11, 20, "LAX", 12, 19, 0),
+      Vuelo("AA", 756, "MSY", 11, 58, "BNA", 13, 20, 0),
+      Vuelo("AA", 830, "ORD", 16, 40, "DTW", 18, 55, 0),
+      Vuelo("AA", 220, "SFO", 12, 45, "ORD", 19, 16, 0),
+      Vuelo("AA", 331, "PHL", 16, 10, "ORD", 17, 23, 0),
+      Vuelo("AA", 824, "MSP", 17, 45, "ORD", 19, 18, 0),
+      Vuelo("AA", 649, "PHL", 8, 5, "TPA", 11, 58, 1),
+      Vuelo("AA", 534, "PHX", 2, 35, "DFW", 13, 8, 0),
+      Vuelo("AA", 384, "MIA", 15, 24, "ORD", 17, 33, 0),
+      Vuelo("AA", 328, "DFW", 19, 59, "STL", 11, 34, 0),
+      Vuelo("AA", 319, "DCA", 15, 59, "ORD", 17, 10, 0),
+      Vuelo("AA", 654, "DFW", 20, 6, "MSY", 11, 33, 0),
+      Vuelo("AA", 926, "DFW", 23, 16, "HOU", 12, 15, 0),
+      Vuelo("AA", 379, "ORD", 9, 0, "DEN", 10, 37, 0),
+      Vuelo("AA", 530, "SFO", 12, 22, "BNA", 18, 38, 0),
+      Vuelo("AA", 435, "DTW", 20, 15, "LAX", 13, 29, 1),
+      Vuelo("AA", 616, "DFW", 13, 2, "MSY", 14, 32, 0),
+      Vuelo("AA", 476, "TPA", 16, 0, "DFW", 17, 42, 0),
+      Vuelo("AA", 498, "DFW", 14, 25, "MIA", 18, 4, 0),
+      Vuelo("AA", 868, "ATL", 17, 40, "RDU", 18, 57, 0),
+      Vuelo("AA", 864, "DFW", 6, 56, "ATL", 15, 3, 0),
+      Vuelo("AA", 357, "ATL", 13, 5, "ORD", 13, 55, 0),
+      Vuelo("AA", 180, "ORD", 10, 14, "ATL", 13, 4, 0)
+    )
 
     type itn = List[Vuelo]
 
@@ -294,14 +338,19 @@ package object paquete {
 
       val ls = for (c <- itinerario(a1, a2) if (((horaLlegadaAuxiliarNecesaria(c.last, h) * 60) + m) >= ((horaLlegadaAuxiliar(c.last) * 60) + c.last.ML))) yield c
 
-      if (ls.head.length == 1) {
-        ls.sortBy(r => r.head.HS).reverse.take(1)
+      if (ls.isEmpty){
+        ls
+      }else{
+        if (ls.head.length == 1) {
+          ls.sortBy(r => r.head.HS).reverse.take(1)
 
-      } else {
+        } else {
 
-        ls.sortBy(r => (r.head.HS, r.last.HS)).reverse.take(1)
+          ls.sortBy(r => (r.head.HS, r.last.HS)).reverse.take(1)
 
+        }
       }
+
     }
 
     //. . . . . . . . . P A R A L E L I Z A R . . . . . . . . . .
@@ -495,14 +544,20 @@ package object paquete {
     def itinerariosSalidaPar(a1: String, a2: String, h: Int, m: Int): List[itn] = {
 
       val ls = for (c <- itinerarioPar(a1, a2) if (((horaLlegadaAuxiliarNecesaria(c.last, h) * 60) + m) >= ((horaLlegadaAuxiliar(c.last) * 60) + c.last.ML))) yield c
-      if (ls.head.length == 1) {
-        ls.sortBy(r => r.head.HS).reverse.take(1).par.toList
 
-      } else {
+      if (ls.isEmpty){
+        ls
+      }else{
+        if (ls.head.length == 1) {
+          ls.sortBy(r => r.head.HS).reverse.take(1).par.toList
 
-        ls.sortBy(r => (r.head.HS, r.last.HS)).reverse.take(1).par.toList
+        } else {
 
+          ls.sortBy(r => (r.head.HS, r.last.HS)).reverse.take(1).par.toList
+
+        }
       }
+
     }
   }
 }
